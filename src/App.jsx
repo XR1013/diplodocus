@@ -1,7 +1,7 @@
 import Footer from './components/common/Footer';
 import Header from './components/common/Header';
 import Home from './components/main/Home';
-import Gallery from './components/sub/Gallery';
+import Product from './components/sub/Product';
 import Members from './components/sub/Members';
 import Posts from './components/sub/Posts';
 import Youtube from './components/sub/Youtube';
@@ -12,6 +12,7 @@ import { AnimatePresence } from 'framer-motion';
 import MobileMenu from './components/common/MobileMenu';
 import { useZustandStore } from './hooks/useZustand';
 import ColorSelector from './components/common/ColorSelector';
+import BackgroundVideo from './components/sub/backgroundVideo';
 
 export default function App() {
 	const location = useLocation();
@@ -25,11 +26,13 @@ export default function App() {
 				<Routes location={location} key={location.pathname}>
 					<Route path='/' element={<Home />} />
 					<Route path='/members' element={<Members />} />
-					<Route path='/gallery' element={<Gallery />} />
+					<Route path='/product' element={<Product />} />
 					<Route path='/youtube' element={<Youtube />} />
 					<Route path='/youtube/:id' element={<YoutubeDetail />} />
 					<Route path='/contact' element={<Contact />} />
 					<Route path='/posts' element={<Posts />} />
+					<Route path='/backgroundVideo' element={<BackgroundVideo />} />
+					
 				</Routes>
 			</AnimatePresence>
 

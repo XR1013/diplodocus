@@ -4,7 +4,7 @@ import { useZustandStore } from '../../hooks/useZustand';
 
 export default function Header() {
 	const setMenuToggle = useZustandStore(state => state.setMenuToggle);
-	const gnbArr = ['members', 'gallery', 'youtube', 'contact', 'posts'];
+	const gnbArr = ['members', 'product', 'youtube', 'contact', 'posts'];
 	const snsArr = [FaEnvelope, FaInstagram, FaYoutube];
 	const { pathname } = useLocation();
 
