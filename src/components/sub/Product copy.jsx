@@ -5,7 +5,7 @@ import Pic from '../common/Pic';
 
 export default function Product() {
     const [Flickr, setFlickr] = useState([]);
-    const [hoveredImage, setHoveredImage] = useState(null);
+    console.log(Flickr);
 
     useEffect(() => {
         const method = 'flickr.people.getPhotos';
@@ -22,7 +22,7 @@ export default function Product() {
     }, []);
 
     const totalImages = Flickr.length;
-    const angleStep = 360 / totalImages;
+    const angleStep = 360 / totalImages; // 각 이미지의 간격을 360도에서 나눈 각도로 설정
 
     return (
         <div className="product-page">
@@ -31,29 +31,21 @@ export default function Product() {
                 <div className="center-text">AVALLION UNIVERSE</div>
                 <section className="productList">
                     {Flickr.map((data, idx) => {
-                        const rotation = angleStep * idx;
+                        const rotation = angleStep * idx; // 각 이미지의 회전 각도 계산
                         return (
-                            <article
-                                key={idx}
-                                style={{
+                            <article key={idx} style={{
                                     position: "absolute",
                                     transform: `rotate(${rotation}deg) translate(20vw) rotate(-${rotation}deg)`,
-                                }}
-                            >
-                                <h3
-                                    onMouseEnter={() => setHoveredImage(`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`)}
-                                    onMouseLeave={() => setHoveredImage(null)}
-                                >
-                                    {data.title}
-                                </h3>
+                                }}>
+                                    
+                                <Pic
+                                    src={`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`}
+                                    className="pic"
+                                />
+                                <h3>{data.title}</h3>
                             </article>
                         );
                     })}
-                    {hoveredImage && (
-                        <div className="hovered-image">
-                            <img src={hoveredImage} alt="Hovered" />
-                        </div>
-                    )}
                 </section>
             </Layout>
         </div>
