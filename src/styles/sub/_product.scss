@@ -1,5 +1,7 @@
 .product-page {
     position: relative;
+    z-index: 1;
+    color: #fff;
 
     .background-video {
         position: absolute;
@@ -8,11 +10,16 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        
+
         video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
     }
 
@@ -34,6 +41,11 @@
         position: relative;
         z-index: 2;
         flex-wrap: wrap;
+
+        &.mobile {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 
     .product-item {
@@ -73,11 +85,8 @@
         margin-top: 10px;
         transition: transform 0.3s ease;
     }
-}
 
-/* 반응형 스타일 */
-@media (max-width: $tablet) {
-    .product-page {
+    @media screen and (max-width: $tablet) {
         .center-text {
             font-size: 1.5rem;
             top: 5%;
@@ -94,20 +103,25 @@
             }
         }
 
-        .hovered-image {
-            img {
-                max-width: 300px;
+        .hovered-image img {
+            max-width: 300px;
+        }
+
+        .background-video article {
+            width: 47%;
+            margin-bottom: 50px;
+
+            .pic {
+                height: 40vw;
             }
         }
     }
-}
 
-@media (max-width: $mobile) {
-    .product-page {
-        background: url('eclipse.jpg') no-repeat center center /cover;
+    @media screen and (max-width: $mobile) {
+        background: url('eclipse.jpg') no-repeat center center / cover;
 
         .background-video {
-            display: none; /* 배경 비디오를 숨김 */
+            display: none; /* 배경 비디오 숨김 */
         }
 
         .center-text {
@@ -121,13 +135,20 @@
         }
 
         .product-item {
+            position: relative;
+
             .name {
                 font-size: 0.9rem;
                 padding: 3px;
             }
+
             .mobile-image {
-                max-width: 200px;
+                max-width: 300px;
             }
+        }
+
+        .background-video article {
+            width: 100%;
         }
     }
 }

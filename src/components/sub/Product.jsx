@@ -34,9 +34,6 @@ export default function Product() {
         };
     }, []);
 
-    const totalImages = Flickr.length;
-    const angleStep = 360 / totalImages;
-
     return (
         <div className="product-page">
             <div className="background-video">
@@ -44,16 +41,17 @@ export default function Product() {
             </div>
             <Layout title={"Products"}>
                 <div className="center-text">AVALLION UNIVERSE</div>
-                <section className="productList">
+                <section className={`productList ${isMobile ? 'mobile' : ''}`}>
                     {Flickr.map((data, idx) => {
-                        const rotation = angleStep * idx;
                         const imageUrl = `https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`;
                         return (
                             <article
                                 key={idx}
                                 className="product-item"
                                 style={{
-                                    transform: `rotate(${rotation}deg) translate(20vw) rotate(-${rotation}deg)`,
+                                    transform: !isMobile
+                                        ? `rotate(${(360 / Flickr.length) * idx}deg) translate(20vw) rotate(-${(360 / Flickr.length) * idx}deg)`
+                                        : 'none',
                                 }}
                             >
                                 <h3
