@@ -98,6 +98,12 @@ $mobile: 599px;
 
 @media (max-width: $mobile) {
     .product-page {
+        background: url('david.jpg') no-repeat center center /cover;
+
+        .background-video {
+            display: none; /* 배경 비디오를 숨김 */
+        }
+
         .center-text {
             font-size: 1.2rem;
             top: 3%;
@@ -116,35 +122,10 @@ $mobile: 599px;
         }
 
         .hovered-image {
+
             img {
                 max-width: 200px;
             }
         }
     }
-}
-
-
-@media screen and (max-width: $tablet) {
-	.product {
-		.productList {
-			article {
-				width: 47%;
-				margin-bottom: 50px;
-				.pic {
-					height: 40vw;
-				}
-			}
-		}
-	}
-}
-@media screen and (max-width: $mobile) {
-
-	.product-page{
-		background: #000;
-		.productList {
-			article {
-				width: 100%;
-			}
-		}
-	}
 }
