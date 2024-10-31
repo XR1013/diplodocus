@@ -26,8 +26,10 @@ export default function Product() {
 
     return (
         <div className="product-page">
-            <BackgroundVideo />
-            <Layout title={"Product"}>
+            <div className="background-video">
+                <BackgroundVideo />
+            </div>
+            <Layout title={"Products"}>
                 <div className="center-text">AVALLION UNIVERSE</div>
                 <section className="productList">
                     {Flickr.map((data, idx) => {
@@ -35,12 +37,13 @@ export default function Product() {
                         return (
                             <article
                                 key={idx}
+                                className="product-item"
                                 style={{
-                                    position: "absolute",
                                     transform: `rotate(${rotation}deg) translate(20vw) rotate(-${rotation}deg)`,
                                 }}
                             >
                                 <h3
+                                    className="name"
                                     onMouseEnter={() => setHoveredImage(`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`)}
                                     onMouseLeave={() => setHoveredImage(null)}
                                 >
