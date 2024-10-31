@@ -6,6 +6,7 @@ import Pic from '../common/Pic';
 export default function Product() {
     const [Flickr, setFlickr] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const method = 'flickr.people.getPhotos';
@@ -19,6 +20,18 @@ export default function Product() {
             .then(json => {
                 setFlickr(json.photos.photo);
             });
+
+        // 화면 크기에 따라 모바일 환경인지 확인
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     const totalImages = Flickr.length;
@@ -34,6 +47,7 @@ export default function Product() {
                 <section className="productList">
                     {Flickr.map((data, idx) => {
                         const rotation = angleStep * idx;
+                        const imageUrl = `https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`;
                         return (
                             <article
                                 key={idx}
@@ -44,15 +58,19 @@ export default function Product() {
                             >
                                 <h3
                                     className="name"
-                                    onMouseEnter={() => setHoveredImage(`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`)}
+                                    onMouseEnter={() => !isMobile && setHoveredImage(imageUrl)}
                                     onMouseLeave={() => setHoveredImage(null)}
                                 >
                                     {data.title}
                                 </h3>
+                                {/* 모바일 환경에서 바로 이미지를 출력 */}
+                                {isMobile && (
+                                    <img src={imageUrl} alt={data.title} className="mobile-image" />
+                                )}
                             </article>
                         );
                     })}
-                    {hoveredImage && (
+                    {!isMobile && hoveredImage && (
                         <div className="hovered-image">
                             <img src={hoveredImage} alt="Hovered" />
                         </div>
