@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import BackgroundVideo from './backgroundVideo';
+import Pic from '../common/Pic';
 
 export default function Product() {
     const [Flickr, setFlickr] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
-
-    // 모바일인지 확인하는 상태
-    const isMobile = window.innerWidth <= 599;
 
     useEffect(() => {
         const method = 'flickr.people.getPhotos';
@@ -17,8 +15,8 @@ export default function Product() {
         const url = `https://www.flickr.com/services/rest/?method=${method}&api_key=${flickr_api}&user_id=${myID}&per_page=${num}&nojsoncallback=1&format=json`;
 
         fetch(url)
-            .then((data) => data.json())
-            .then((json) => {
+            .then(data => data.json())
+            .then(json => {
                 setFlickr(json.photos.photo);
             });
     }, []);
@@ -46,24 +44,15 @@ export default function Product() {
                             >
                                 <h3
                                     className="name"
-                                    // 모바일 환경이 아닐 때만 onMouseEnter 이벤트 적용
-                                    onMouseEnter={
-                                        !isMobile
-                                            ? () =>
-                                                  setHoveredImage(
-                                                      `https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`
-                                                  )
-                                            : null
-                                    }
-                                    onMouseLeave={!isMobile ? () => setHoveredImage(null) : null}
+                                    onMouseEnter={() => setHoveredImage(`https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_z.jpg`)}
+                                    onMouseLeave={() => setHoveredImage(null)}
                                 >
                                     {data.title}
                                 </h3>
                             </article>
                         );
                     })}
-                    {/* 모바일 환경이 아닐 때만 hoveredImage 표시 */}
-                    {!isMobile && hoveredImage && (
+                    {hoveredImage && (
                         <div className="hovered-image">
                             <img src={hoveredImage} alt="Hovered" />
                         </div>

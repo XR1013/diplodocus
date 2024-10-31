@@ -60,7 +60,6 @@ $mobile: 599px;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3;
-        display: none; // 기본값으로 숨김 처리
 
         img {
             width: 85%;
@@ -99,7 +98,11 @@ $mobile: 599px;
 
 @media (max-width: $mobile) {
     .product-page {
-        background: #000;
+        background: url('eclipse.jpg') no-repeat center center /cover;
+
+        .background-video {
+            display: none; /* 배경 비디오를 숨김 */
+        }
 
         .center-text {
             font-size: 1.2rem;
@@ -118,17 +121,10 @@ $mobile: 599px;
             }
         }
 
-        /* 모바일 환경에서는 hovered-image가 항상 표시되도록 수정 */
         .hovered-image {
-            position: static;
-            display: block;
-            margin: 10px auto;
 
             img {
-                width: 100%;
                 max-width: 200px;
-                height: auto;
-                border: none;
             }
         }
     }
