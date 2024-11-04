@@ -4,8 +4,8 @@
 	color: #fff; /* 텍스트 색상 */
 
 	.background-video { /* 배경 비디오를 위한 설정 */
-		position: absolute;
-		top: 800px; /* 상단에서 140px 떨어짐 */
+		position: static;
+		top: 140px; /* 상단에서 140px 떨어짐 */
 		left: 50px; /* 왼쪽에서 50px 떨어짐 */
 		width: calc(100% - 100px); /* 부모 요소의 전체 너비에서 100px을 뺀 값 */
 		height: calc(100% - 100px); /* 부모 요소의 전체 높이에서 100px을 뺀 값 */
